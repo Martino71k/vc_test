@@ -217,3 +217,9 @@ let doAgain = (index) => {
 	let test = document.querySelector('.test')
 	document.querySelector('.test__final').replaceWith(test)
 }
+
+
+document.querySelector('.header__mob').addEventListener('click', () => {
+	let menu = document.querySelectorAll('.header__nav')
+	menu.forEach(element => element.classList.toggle('header__nav--active'))
+})

@@ -33,10 +33,75 @@ input[type="radio"].visually-hidden {
   overflow: hidden;
 }
 
+
 .header {
-	
   position: relative;
   width: 100%;
+}
+
+
+.header__mob {
+	display: none;
+}
+
+@media (max-width: 659px) {
+	.header__mob {
+		font-family: Roboto;
+		display: block;
+		font-weight: 700;
+		position: absolute;
+		right: 5px;
+		top: 20px;
+		background-color: transparent;
+		border: 2px solid #e25a76;
+		font-size: 16px;
+		border-radius: 40px;
+	}
+	
+}
+
+.header__container {
+  margin: 0;
+  padding: 10px 10px;
+}
+
+.header__logo {
+  display: inline-block;
+  padding-left: 20px;
+  text-decoration: none;
+}
+
+.header__nav {
+	display: none;
+}
+.header__nav--active {
+	display: block;
+}
+
+@media (min-width: 660px) {
+  .header__container {
+    display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		list-style: none;
+		margin: 0;
+		padding: 22px 0;
+		padding-bottom: 25px;
+	}
+	
+	.header__nav {
+		display: -webkit-box;
+		display: -ms-flexbox;
+		display: flex;
+		-webkit-box-pack: justify;
+				-ms-flex-pack: justify;
+						justify-content: space-between;
+		margin-top: 10px;
+		margin-left: 30px;
+		-webkit-box-align: center;
+				-ms-flex-align: center;
+						align-items: center;
+	}
 }
 
 @media (min-width: 960px) {
@@ -54,91 +119,68 @@ input[type="radio"].visually-hidden {
     -webkit-box-pack: justify;
         -ms-flex-pack: justify;
             justify-content: space-between;
-  }
-}
+	}
 
-
-.header__container {
-	position: absolute;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 22px 0;
-  padding-bottom: 25px;
-}
-
-@media (min-width: 660px) {
-  .header__container {
-    display: -webkit-box;
-		display: -ms-flexbox;
-		display: flex;
-		list-style: none;
-		margin: 0;
-		padding: 22px 0;
-		padding-bottom: 25px;
-  }
-}
-
-@media (min-width: 960px) {
-  .header__container {
+	.header__container {
     padding: 0;
     
     padding-top: 15px;
     width: 147px;
     height: 41px;
-  }
-}
-
-.header__logo {
-  display: inline-block;
-  padding-left: 20px;
-  text-decoration: none;
-}
-
-@media (min-width: 960px) {
-  .header__logo {
+	}
+	
+	.header__logo {
     padding-left: 0;
   }
 }
 
-.header__nav {
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-pack: justify;
-	    -ms-flex-pack: justify;
-	        justify-content: space-between;
-	margin-top: 10px;
-	margin-left: 30px;
-	-webkit-box-align: center;
-	    -ms-flex-align: center;
-	        align-items: center;
+.header__nav_link {
+	margin-bottom: 15px;
+	font-size: 16px;
+	
 }
 
-.header__nav_link {
-	margin-left: 40px;
-	font-size: 14px;
-	text-align: center;
+@media (max-width: 659px) {
+	.header__nav_link {
+		width: 200px;
+		padding: 8px;
+		
+	}
+}
+
+@media (min-width: 660px) {
+	.header__nav_link {
+		margin-left: 40px;
+		font-size: 14px;
+		text-align: center;
+	}
+	
+}
+
+
+.popular {
+	margin-right: auto;
 }
 
 .popular-pop {
 	position: relative;
 }
 
-.popular-pop::before {
-	content: "";
-	position: absolute;
-	width: 100%;
-	top: -5px;
-	height: 3px;
-	background-color: #e25a76;
-	
+@media (min-width: 660px) {
+	.popular-pop::before {
+		content: "";
+		position: absolute;
+		width: 100%;
+		top: -5px;
+		height: 3px;
+		background-color: #e25a76;
+	}
 }
+
 .popular-fresh {
 	position: relative;
 	font-weight: 400;
+	
 }
 
 .popular-fresh::before {
@@ -151,6 +193,20 @@ input[type="radio"].visually-hidden {
 	right: -25px;
 	color: #fff;
 	border-radius: 2px;
+}
+
+
+@media (max-width: 659px) {
+	.popular-fresh::before {
+		right: 0;
+		left: 100px;
+		height: 20px;
+		bottom: 0;
+		top: 8px;
+		text-align: center;
+		padding-top: 3px;
+		box-sizing: border-box;
+	}
 }
 
 .popular-blog {
@@ -168,9 +224,7 @@ input[type="radio"].visually-hidden {
 	cursor: pointer;
 }
 
-.popular {
-	margin-right: auto;
-}
+
 
 .search-btn {
 	margin-right: 50px;
@@ -370,4 +424,33 @@ input[type="radio"].visually-hidden {
 
 .test__final_text {
 	width: 330px;
+}
+
+@media (max-width: 659px) {
+	.slide-bottom {
+		-webkit-animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+						animation: slide-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	}
+	
+	@-webkit-keyframes slide-bottom {
+		0% {
+			-webkit-transform: translateY(-200px);
+							transform: translateY(-200px);
+		}
+		100% {
+			-webkit-transform: translateY(0);
+							transform: translateY(0);
+		}
+	}
+	@keyframes slide-bottom {
+		0% {
+			-webkit-transform: translateY(-200px);
+							transform: translateY(-200px);
+		}
+		100% {
+			-webkit-transform: translateY(0);
+							transform: translateY(0);
+		}
+	}
+	
 }
