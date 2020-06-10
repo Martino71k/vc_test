@@ -56,6 +56,8 @@ let obj2 = [
 }
 ]
 
+
+
 let results = [
 {
 	'правильных': 0,
@@ -92,48 +94,44 @@ let replaceTitle = index => {
 	let currentQuestion = obj2[index]
 	let questionCount = currentQuestion['номер вопроса']
 	
-	
 	let test = document.createElement('div')
 			test.innerHTML =  `<p>${questionCount + '/' + obj2.length}</p><h2 class='test__title'>${currentQuestion['вопрос']}</h2>`
 			test.classList.add('test')
 			document.body.appendChild(test)
 
 
-			let createList = document.createElement('ul') //создаем ul
-			createList.classList.add('test__list')
-			createList.setAttribute('id','test__list')
-			test.appendChild(createList)
+			let list = document.createElement('ul') //создаем ul
+			list.classList.add('test__list')
+			list.setAttribute('id','test__list')
+			test.appendChild(list)
 
 			for (let j = 0 ; j < currentQuestion['ответы'].length; j++) { //созадем li 
-				let createItem = document.createElement('li')
-				createItem.classList.add('test__item')
-				createItem.innerHTML = currentQuestion['ответы'][j]
-				createList.appendChild(createItem)
+				let item = document.createElement('li')
+				item.classList.add('test__item')
+				item.innerHTML = currentQuestion['ответы'][j]
+				list.appendChild(item)
 				
-				createItem.addEventListener('click', e => { //проверяем правильность ответа
-					let createAnswerDescr = document.createElement('p')
-					createAnswerDescr.classList.add('test__description')
+				item.addEventListener('click', e => { //проверяем правильность ответа
+					let answerDescr = document.createElement('p')
+					answerDescr.classList.add('test__description')
+
 					if (currentQuestion['ответы'][j] === currentQuestion['верный ответ']) {
-						console.log('right') 
-						// createItem.outerHTML = ''
 						correctAnswers += 1
-						console.log(correctAnswers)
-						createItem.classList.add('test__item-right')
+						item.classList.add('test__item-right')
 					} else {
-						console.log('wrong!!!!!!')
-						createItem.classList.add('test__item-wrong')
+						item.classList.add('test__item-wrong')
 					}
 					
 					e.target.style.pointerEvents = "none";
 					e.target.classList.add('active') // удаление других
-					createList.childNodes.forEach(li => {
+					list.childNodes.forEach(li => {
 						if (!li.classList.contains('active')) {
 							li.style.display = 'none'
 						}
 					})
-						createAnswerDescr.innerHTML = currentQuestion['пояснения к ответам'][j]
-						test.appendChild(createAnswerDescr)
-
+						answerDescr.innerHTML = currentQuestion['пояснения к ответам'][j]
+						test.appendChild(answerDescr)
+						
 						let createBtn = document.createElement('button') //создаем кнопку
 						createBtn.classList.add('test__btn')
 						createBtn.innerHTML = `Продолжить 
@@ -157,7 +155,6 @@ let replaceTitle = index => {
 			}
 			document.querySelector(".test").replaceWith(test)
 }
-
 
 document.querySelector(".sp__btn").addEventListener("click", () => {
 	spWrapper.remove();
@@ -189,23 +186,23 @@ let addFinal = () => {
 				<p class="test__final_text">${sum}</p>
 				<ul class="test__final_list">
 					<li>
-						<a class="test__final_link" href="https://www.facebook.com/sharer/sharer.php?u=https://martino71k.github.io/vc_test/">
-							<svg xmlns="http://www.w3.org/2000/svg" width="13" height="24" viewBox="0 0 13 24">
+						<a class="test__final_link" href="https://www.facebook.com/sharer/sharer.php?u=https://martino71k.github.io/vc_test/" target="_blank">
+							<svg class="test__final_link_icon--facebook" xmlns="http://www.w3.org/2000/svg" width="13" height="24" viewBox="0 0 13 24">
 								<path fill="#4267B2" fill-rule="evenodd" d="M12.348.16L9.27.157c-3.457 0-5.692 2.288-5.692 5.83v2.688H.483A.483.483 0 0 0 0 9.156v3.896c0 .266.217.482.483.482h3.095v9.828c0 .265.217.482.485.482h4.036a.484.484 0 0 0 .484-.482v-9.828h3.618a.483.483 0 0 0 .484-.482l.002-3.896a.487.487 0 0 0-.485-.482H8.583V6.395c0-1.095.262-1.651 1.69-1.651l2.074-.001a.483.483 0 0 0 .483-.483V.645a.484.484 0 0 0-.482-.484z"/>
 							</svg>
 							Поделиться
 						</a>
 					</li>
 					<li>
-						<a class="test__final_link" href="https://vk.com/share.php?url=https://martino71k.github.io/vc_test/&title=Тест&description=Получил ${correctAnswers} правильных ответов">
-							<svg xmlns="http://www.w3.org/2000/svg" width="30" height="18" viewBox="0 0 30 18">
+						<a class="test__final_link" href="https://vk.com/share.php?url=https://martino71k.github.io/vc_test/&title=Тест&description=Получил ${correctAnswers} правильных ответов" target="_blank">
+							<svg class="test__final_link_icon--vk" xmlns="http://www.w3.org/2000/svg" width="30" height="18" viewBox="0 0 30 18">
     						<path fill="#5B88BD" fill-rule="evenodd" d="M27.996 14.027c-.845-1.024-1.837-1.896-2.776-2.823-.848-.836-.902-1.32-.22-2.286.743-1.053 1.544-2.065 2.294-3.114.7-.98 1.416-1.957 1.785-3.13.234-.745.027-1.076-.73-1.207-.13-.023-.265-.023-.399-.023l-4.49-.006c-.553-.008-.859.235-1.054.731-.265.67-.536 1.34-.852 1.987-.712 1.464-1.51 2.882-2.627 4.082-.246.264-.519.598-.93.46-.517-.19-.667-1.048-.66-1.338l-.004-5.24c-.1-.748-.264-1.083-.999-1.228L11.67.893c-.622 0-.935.242-1.267.637-.192.228-.25.375.145.45.774.149 1.21.655 1.326 1.44.185 1.255.172 2.514.066 3.772-.031.368-.094.735-.24 1.078-.224.54-.589.65-1.066.317-.433-.3-.739-.724-1.036-1.15C8.48 5.839 7.585 4.115 6.858 2.304c-.21-.523-.573-.84-1.121-.848a114.665 114.665 0 0 0-4.043 0c-.81.016-1.05.413-.72 1.157 1.466 3.3 3.1 6.509 5.23 9.43 1.096 1.502 2.352 2.825 3.976 3.763 1.84 1.065 3.82 1.384 5.907 1.285.976-.046 1.27-.303 1.315-1.288.031-.672.106-1.342.435-1.947.322-.594.81-.707 1.374-.338.281.186.518.42.743.669.55.609 1.08 1.235 1.65 1.822.716.737 1.564 1.172 2.63 1.084h4.128c.664-.044 1.01-.869.628-1.618-.268-.527-.62-.995-.994-1.448z"/>
 							</svg>
 						</a>
 					</li>
 					<li>
-						<a class="test__final_link" href="https://twitter.com/intent/tweet?text=Получил ${correctAnswers} правильных ответов&url=https://martino71k.github.io/vc_test/&via=TWITTER-HANDLE">
-							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="0 0 26 22">
+						<a class="test__final_link" href="https://twitter.com/intent/tweet?text=Получил ${correctAnswers} правильных ответов&url=https://martino71k.github.io/vc_test/&via=TWITTER-HANDLE" target="_blank">
+							<svg class="test__final_link_icon--twitter" xmlns="http://www.w3.org/2000/svg" width="26" height="22" viewBox="0 0 26 22">
 								<path fill="#1DA1F2" fill-rule="evenodd" d="M25.99 3.156c-.951.412-1.982.696-3.06.82a5.254 5.254 0 0 0 2.346-2.873 10.797 10.797 0 0 1-3.393 1.259A5.388 5.388 0 0 0 17.998.726c-2.941 0-5.328 2.324-5.328 5.187 0 .41.049.803.136 1.182-4.433-.217-8.356-2.279-10.988-5.42a5.046 5.046 0 0 0-.723 2.61c0 1.798.944 3.39 2.37 4.314a5.357 5.357 0 0 1-2.408-.648v.063c0 2.516 1.839 4.614 4.272 5.095a5.64 5.64 0 0 1-2.41.085c.683 2.06 2.648 3.557 4.98 3.604a10.897 10.897 0 0 1-6.621 2.215c-.428 0-.848-.023-1.269-.069a15.381 15.381 0 0 0 8.174 2.33c9.799 0 15.159-7.905 15.159-14.758l-.016-.672a10.584 10.584 0 0 0 2.665-2.688z"/>
 							</svg>
 						</a>
@@ -232,7 +229,6 @@ let doAgain = (index) => {
 	let test = document.querySelector('.test')
 	document.querySelector('.test__final').replaceWith(test)
 }
-
 
 document.querySelector('.header__mob').addEventListener('click', () => {
 	let menu = document.querySelectorAll('.header__nav')
