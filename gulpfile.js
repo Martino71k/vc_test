@@ -3,7 +3,7 @@ const autoprefixer = require('gulp-autoprefixer');
 var csso = require('gulp-csso');
 var rename = require("gulp-rename")
 const imagemin = require('gulp-imagemin');
- 
+
 exports.default = () => (
     gulp.src('style.css')
         .pipe(autoprefixer({
